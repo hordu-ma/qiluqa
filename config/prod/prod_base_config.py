@@ -1,0 +1,15 @@
+PROD_HTTP_HOST = "http://172.18.6.117"
+# PROD_HTTP_HOST = "https://172.18.6.117"
+
+# 意图识别模型
+PROD_INTENTION_RECOGNITION_MODEL = "DashScope"
+PROD_INTENTION_RECOGNITION_MODEL_NAME = "qwen3-235b-instruct"
+# 问题优化模型
+PROD_QUES_OPTIMIZER_MODEL = "DashScope"
+PROD_QUES_OPTIMIZER_MODEL_NAME = "qwen3-235b-instruct"
+# 文件summary模型
+PROD_FILES_SUMMARY_MODEL = "DashScope"
+PROD_FILES_SUMMARY_MODEL_NAME = "qwen3-235b-instruct"
+# 深度思考模型
+PROD_THINKING_MODEL = "DashScope"
+PROD_THINKING_MODEL_NAME = "qwen3-235b-think"

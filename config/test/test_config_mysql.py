@@ -1,0 +1,7 @@
+import os
+TEST_MYSQL_HOST = os.environ.get("MYSQL_HOST") or "47.236.254.2"
+TEST_MYSQL_PORT = "3306"
+TEST_MYSQL_CHARSET = "utf8mb4"
+TEST_MYSQL_DATABASE = "chat_omni_pro"
+TEST_MYSQL_USER = "chat_omni_pro"
+TEST_MYSQL_PASSWD = "KxDcNtGIFWeT"

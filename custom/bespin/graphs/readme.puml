@@ -1,0 +1,24 @@
+@startuml
+
+Title Langchain Graph Chain 原理
+
+rectangle "<b>step 1</b>\n查询Neo4j的schema信息" as s1 #lightblue
+rectangle "<b>step 2</b>\n封装Cypher提示词模板" as s2 #lightblue
+rectangle "<b>step 3</b>\n发起LLM推理，获取Cypher查询语句" as s3 #lightblue
+rectangle "<b>step 4</b>\n执行Cypher查询语句，获取Neo4j的关联数据(子集树)" as s4 #lightblue
+rectangle "<b>step 5</b>\n封装QA提示词模板" as s5 #lightblue
+rectangle "<b>step 6</b>\n发起LLM推理，获取自然语言解答结果" as s6 #lightblue
+
+rectangle "<b>step a1</b>\n填充顺序链提示词模板" as a1 #lightblue
+rectangle "<b>step a2</b>\n简洁&四段式流程问答" as a2 #lightblue
+
+s1 -down-> s2 #green
+s2 -down-> s3 #green
+s3 -down-> s4 #green
+s4 -down-> s5 #green
+s5 -down-> s6 #green
+
+s4 -down-> a1 #red
+a1 -down-> a2 #red
+
+@enduml

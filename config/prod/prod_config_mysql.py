@@ -1,0 +1,6 @@
+PROD_MYSQL_HOST = "mysql"
+PROD_MYSQL_PORT = "3306"
+PROD_MYSQL_CHARSET = "utf8mb4"
+PROD_MYSQL_DATABASE = "chat_omni_pro"
+PROD_MYSQL_USER = "chat_omni_pro"
+PROD_MYSQL_PASSWD = "KxDcNtGIFWeT"

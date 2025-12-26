@@ -1,0 +1,86 @@
+[project]
+name = "chatomni-local-qa-qilumed-dev"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "apscheduler~=3.10.1",
+    "asyncio==3.4.3",
+    "beautifulsoup4==4.12.3",
+    "dashscope~=1.20.1",
+    "fake-useragent==1.5.1",
+    "fastapi~=0.110.3",
+    "httpx==0.27.0",
+    "jwt~=1.3.1",
+    "langchain~=0.3.3",
+    "langchain-community~=0.3.2",
+    "langchain-core~=0.3.10",
+    "langchain-openai~=0.2.2",
+    "llama-index==0.10.37",
+    "loguru~=0.7.0",
+    "neo4j==5.20.0",
+    "numpy>=1.26,<2",
+    "openai~=1.40.0",
+    "opencv-python~=4.8.1.78",
+    "openpyxl~=3.1.2",
+    "openpyxl-image-loader>=1.0.5",
+    "pandas~=1.5.3",
+    "pgvector~=0.1.8",
+    "pinecone-client==2.2.1",
+    "psutil>=7.2.0",
+    "psycopg2-binary>=2.9.11",
+    "pycryptodome>=3.23.0",
+    "pydantic~=2.7.4",
+    "pymysql==1.0.3",
+    "pypdf>=4.3.1",
+    "pytesseract>=0.3.13",
+    "python-multipart==0.0.6",
+    "ragas==0.0.22",
+    "redis~=2.10.6",
+    "requests~=2.31.0",
+    "sqlalchemy~=2.0.28",
+    "sse-starlette==2.1.0",
+    "starlette~=0.37.2",
+    "unstructured>=0.18.21",
+    "uvicorn==0.22.0",
+]
+
+[tool.ruff]
+# 该仓库为“已在生产可用的遗留代码”，优先保障可运行性与信噪比。
+# 在本子项目放宽部分非致命规则，避免被历史代码风格噪声淹没。
+target-version = "py311"
+line-length = 200
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+]
+
+[tool.ruff.lint]
+# 放宽：import * 相关（F403/F405）、部分“不会导致运行错误”的告警，以及长行（E501）
+ignore = [
+    "F403", # import * used; unable to detect undefined names（遗留配置模块大量使用）
+    "F405", # may be undefined, or defined from star imports（同上，连锁噪声）
+    "F401", # unused-import（遗留文件常用于条件导入/side effects）
+    "F841", # unused-variable（少量调试/占位变量）
+    "F541", # f-string-missing-placeholders（通常不致命，避免卡住检查）
+    "E501", # line-too-long（遗留文本/Prompt/日志模板较多，不强制改行）
+]
+# 仅保留基础错误/风格（E/F），不额外开启更激进的规则集
+select = ["E", "F"]
+
+[tool.ruff.format]
+# 仅格式化（如果你后续启用 ruff format），避免触发大规模重排
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.407",
+    "ruff>=0.14.10",
+]

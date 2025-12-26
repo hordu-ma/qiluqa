@@ -1,0 +1,3 @@
+MODEL_TYPE_TEXT = "text"
+MODEL_TYPE_VL = "vl"
+MODEL_TYPE_AUDIO = "audio"
