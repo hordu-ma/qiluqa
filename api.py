@@ -25,8 +25,7 @@ from config.base_config import *
 from config.loguru_config import init_log_config
 from custom.amway import amway_api
 
-if TYPE_CHECKING:
-    from starlette.responses import StreamingResponse
+from starlette.responses import StreamingResponse
 from custom.bespin import bespin_api
 from custom.haleon import haleon_api
 from framework.api_model import QueryResponse
@@ -924,6 +923,7 @@ def api_del_vector_namespace_file(
     tags=["Ragas:结果评估"],
     summary="结果评估",
     response_description="返回体对象[status:结果状态(0成功), message:错误信息, data:业务数据]",
+    response_model=None,
 )
 async def api_ragas_upload_file(user_file: UploadFile = File(...)) -> QueryResponse | StreamingResponse:
     """
