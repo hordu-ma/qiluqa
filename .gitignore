@@ -20,3 +20,13 @@ bin-release/
 /log
 /bespin-local-qa/
 /venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
