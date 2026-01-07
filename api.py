@@ -934,15 +934,26 @@ async def api_ragas_upload_file(user_file: UploadFile = File(...)) -> QueryRespo
     response = QueryResponse()
     request_id = str(uuid.uuid4())
 
-    import pandas as pd
-    from datasets import Dataset
-    from ragas import evaluate
-    from ragas.metrics import (
-        answer_relevancy,
-        context_precision,
-        context_recall,
-        faithfulness,
-    )
+    # 这些依赖在部分部署场景可能是可选的；使用动态导入避免静态检查直接报错。
+    # 若缺少依赖，在运行期给出明确错误信息。
+    from importlib import import_module
+    from typing import Any
+
+    try:
+        pd: Any = import_module("pandas")
+        Dataset: Any = import_module("datasets").Dataset
+        ragas_module: Any = import_module("ragas")
+        evaluate: Any = ragas_module.evaluate
+        ragas_metrics: Any = import_module("ragas.metrics")
+        answer_relevancy: Any = ragas_metrics.answer_relevancy
+        context_precision: Any = ragas_metrics.context_precision
+        context_recall: Any = ragas_metrics.context_recall
+        faithfulness: Any = ragas_metrics.faithfulness
+    except ModuleNotFoundError as err:
+        raise BusinessException(500, f"缺少依赖 {err.name}，请安装后重试") from err
+    except ImportError as err:
+        raise BusinessException(500, f"依赖导入失败：{err}") from err
+
     from starlette.responses import StreamingResponse
 
     os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY or ""
